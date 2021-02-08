@@ -1,0 +1,22 @@
+name: Add docs
+on:
+    push:
+        branches:
+            - main
+jobs:
+    main:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                uses: actions/checkout@v2
+            -
+                name: Install dependencies
+                run: sudo apt-get install jq
+            -
+                name: Test main.py
+                run: |
+                    python3 main.py test
+            -
+                name: Verify schedule.json
+                run: |
+                    echo "$(cat schedule.json)" | jq empty
